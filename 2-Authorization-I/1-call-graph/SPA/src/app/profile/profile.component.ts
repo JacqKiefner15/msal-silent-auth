@@ -6,7 +6,7 @@ import { ResponseType } from '@microsoft/microsoft-graph-client';
 import { GraphService, ProviderOptions } from '../graph.service';
 import { protectedResources } from '../auth-config';
 import { Profile } from '../profile';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,8 +17,7 @@ export class ProfileComponent implements OnInit {
   displayedColumns: string[] = ['claim', 'value'];
   dataSource: any = [];
   avatar: any;
-    image: any;
- 
+  image: any;
 
   constructor(
     private graphService: GraphService,
@@ -49,16 +48,15 @@ export class ProfileComponent implements OnInit {
       .get()
       .then((response: any) => {
         if (response.status === 200) {
-             response.blob().then((data: any) => {
-               if (data !== null) {
-                 window.URL = window.URL || window.webkitURL;
-                 console.log('data', data);
-                 var objectUrl = window.URL.createObjectURL(data);
-                   console.log('image', this.image);
-                   this.image = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-                   
-               }
-             });
+          response.blob().then((data: any) => {
+            if (data !== null) {
+              window.URL = window.URL || window.webkitURL;
+              console.log('data', data);
+              var objectUrl = window.URL.createObjectURL(data);
+              console.log('image', this.image);
+              this.image = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+            }
+          });
         }
         if (response.status === 401) {
           if (response.headers.get('WWW-Authenticate')) {

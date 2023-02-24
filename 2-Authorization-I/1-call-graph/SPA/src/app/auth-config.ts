@@ -24,7 +24,7 @@ const isIE =
 
 export const msalConfig: Configuration = {
   auth: {
-    clientId: '0d667b5f-1b65-4477-a500-57cf81a6c5ac', // This is the ONLY mandatory field that you need to supply.
+    clientId: '', // This is the ONLY mandatory field that you need to supply.
     authority:
       'https://login.microsoftonline.com/03e832ce-094d-4423-b864-c11e2a626509', // Defaults to "https://login.microsoftonline.com/common"
     redirectUri: '/auth', // Points to window.location.origin by default. You must register this URI on Azure portal/App Registration.
